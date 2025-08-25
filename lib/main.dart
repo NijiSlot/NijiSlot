@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rains/router/screen_controller.dart';
 import 'package:rains/router/screen_name.dart';
-import 'package:rains/ui/base_screen.dart';
+import 'package:rains/ui/pages/splash/splash_view.dart';
+import 'bindings/initial_binding.dart';
 
 void main() {
-  // GetPage を登録
   for (var page in AppScreens.screens) {
     Get.put(page, tag: page.name);
   }
@@ -20,10 +20,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      initialBinding: InitialBinding(),
       title: 'rains',
       theme: ThemeData(primarySwatch: Colors.red),
       getPages: AppScreens.screens,
-      home: const BaseScreen(),
+      home: SplashPage(),
     );
   }
 }
