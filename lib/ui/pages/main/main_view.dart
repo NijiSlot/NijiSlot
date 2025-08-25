@@ -14,13 +14,7 @@ class _MainPageState extends State<MainPage> {
   final MainLogic logic = Get.put(MainLogic());
   final MainState state = Get.find<MainLogic>().state;
 
-  final tabs = [
-    MainTab.home,
-    MainTab.discover,
-    MainTab.tvShows,
-    MainTab.watchlist,
-    MainTab.profile,
-  ];
+  final tabs = [MainTab.home, MainTab.profile];
 
   @override
   void initState() {
@@ -49,19 +43,23 @@ class _MainPageState extends State<MainPage> {
   Widget _buildBottomNavigationBar() {
     final theme = Theme.of(context);
     return Obx(() {
-      return BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        backgroundColor: theme.appBarTheme.backgroundColor,
-        elevation: 8,
-        type: BottomNavigationBarType.fixed,
-        currentIndex: state.selectedIndex.value,
-        unselectedItemColor: Colors.grey,
-        selectedItemColor: theme.colorScheme.secondary,
-        items: tabs.map((e) => e.tab).toList(),
-        onTap: (index) {
-          logic.switchTap(index);
-        },
+      return Theme(
+        data: theme.copyWith(
+          splashFactory: NoSplash.splashFactory,
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+        ),
+        child: BottomNavigationBar(
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          backgroundColor: theme.bottomNavigationBarTheme.backgroundColor,
+          elevation: 8,
+          type: BottomNavigationBarType.fixed,
+          currentIndex: state.selectedIndex.value,
+          items: tabs.map((e) => e.tab).toList(),
+          onTap: logic.switchTap,
+        ),
       );
     });
   }

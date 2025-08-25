@@ -1,7 +1,3 @@
-import 'dart:ui';
-
-import 'package:flutter/material.dart';
-
 import 'package:rains/model/entities/index.dart';
 import 'package:get/get.dart';
 

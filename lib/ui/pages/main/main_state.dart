@@ -15,12 +15,7 @@ class MainState {
     //Initialize index
     selectedIndex = 0.obs;
     //PageView page
-    pageList = [
-      HomeTabPage(),
-      Container(color: Colors.green),
-      Container(color: Colors.red),
-      Container(color: Colors.green),
-    ];
+    pageList = [HomeTabPage(), Container(color: Colors.green)];
     //Page controller
     pageController = PageController();
   }
