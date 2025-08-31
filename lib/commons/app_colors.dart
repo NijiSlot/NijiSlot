@@ -9,7 +9,7 @@ class AppColors {
   ///Background
   static const Color background = Color(0xFF1a222d);
   static const Color backgroundLighter = Color(0xFF1f2837);
-  static const Color backgroundDarker = Color(0xff111821);
+  static const Color backgroundDarker = Color(0xFF090603);
 
   ///Shadow
   static const Color shadow = Color(0x25606060);

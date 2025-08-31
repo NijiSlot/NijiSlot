@@ -4,7 +4,8 @@ import 'package:rains/ui/pages/tab_home/enums/home_section.dart';
 import 'package:rains/ui/pages/tab_home/movies_section/movies_section_view.dart';
 import 'package:rains/ui/pages/tab_home/widgets/home_app_bar.dart';
 import 'package:get/get.dart';
-
+import 'package:rains/commons/app_images.dart';
+import 'package:rains/commons/app_colors.dart';
 import 'home_tab_logic.dart';
 import 'home_tab_state.dart';
 
@@ -39,20 +40,47 @@ class _HomeTabPageState extends State<HomeTabPage>
     return Obx(() {
       return Scaffold(
         appBar: HomeAppBar(avatarUrl: _appService.user.value?.avatarUrl ?? ""),
-        body: SafeArea(
-          child: RefreshIndicator(
-            onRefresh: _onRefreshData,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  _buildTrendingMovies(),
-                  _buildTrendingTvShows(),
-                  _buildNowPlayingMovies(),
-                  _buildUpcomingMovies(),
-                ],
+        body: Stack(
+          children: [
+            SafeArea(
+              child: RefreshIndicator(
+                onRefresh: _onRefreshData,
+                child: SingleChildScrollView(
+                  physics: const ClampingScrollPhysics(),
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        height: 852,
+                        child: Image.asset(
+                          AppImages.backgroundImage,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Positioned(
+                        top: 852,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        child: Container(color: AppColors.backgroundDarker),
+                      ),
+
+                      Column(
+                        children: [
+                          _buildTrendingMovies(),
+                          _buildTrendingTvShows(),
+                          _buildNowPlayingMovies(),
+                          _buildUpcomingMovies(),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
+          ],
         ),
       );
     });

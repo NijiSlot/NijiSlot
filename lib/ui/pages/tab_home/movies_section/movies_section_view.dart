@@ -51,6 +51,7 @@ class _MoviesSectionPageState extends State<MoviesSectionPage> {
                   style: theme.textTheme.titleLarge,
                 ),
                 SizedBox(width: 10),
+
                 Text(
                   "${widget.section.typeName}",
                   style: theme.textTheme.titleLarge,
