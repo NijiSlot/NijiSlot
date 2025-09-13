@@ -1,0 +1,61 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: FastAPI on Lambda (Mangum)
+
+Parameters:
+  TableName:
+    Type: String
+    Default: Users
+  Runtime:
+    Type: String
+    Default: python3.11
+  Arch:
+    Type: String
+    Default: arm64 # or x86_64
+
+Resources:
+  ApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: app.handler
+      Runtime: !Ref Runtime
+      Architectures:
+        - !Ref Arch
+      Timeout: 10
+      MemorySize: 512
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref TableName
+          RT_TTL_SECONDS: "2592000"
+      Policies:
+        - CloudWatchLogsFullAccess
+        - Statement:
+            Effect: Allow
+            Action:
+              - dynamodb:PutItem
+              - dynamodb:GetItem
+              - dynamodb:UpdateItem
+              - dynamodb:Scan
+            Resource: !Sub arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${TableName}
+      Events:
+        HttpIssue:
+          Type: HttpApi
+          Properties:
+            Path: /tokens/issue
+            Method: POST
+        HttpVerify:
+          Type: HttpApi
+          Properties:
+            Path: /tokens/verify
+            Method: POST
+        HttpRevoke:
+          Type: HttpApi
+          Properties:
+            Path: /tokens/revoke
+            Method: POST
+
+Outputs:
+  ApiUrl:
+    Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com"
+    Description: Base URL

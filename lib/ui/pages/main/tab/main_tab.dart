@@ -36,7 +36,7 @@ extension MainTabExtension on MainTab {
       case MainTab.home:
         return 'Home';
       case MainTab.profile:
-        return 'Profile';
+        return 'マイページ';
     }
   }
 }

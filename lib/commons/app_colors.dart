@@ -40,6 +40,9 @@ class AppColors {
   /// Tabs
   static const Color imageBG = Color(0xFF919191);
 
+  ///AppBar
+  static const Color appBar = Color(0xFF8C0304);
+
   ///BottomNavigationBar
   static const Color bottomNavigationBar = Color(0xFF400401);
   static const Color selectedColor = Color(0xFFBE791B);

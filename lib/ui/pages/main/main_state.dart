@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rains/ui/pages/tab_home/home_tab_view.dart';
+import 'package:rains/ui/pages/tab_profile/profile_tab_view.dart';
 
 import 'package:get/get.dart';
 
@@ -15,7 +16,7 @@ class MainState {
     //Initialize index
     selectedIndex = 0.obs;
     //PageView page
-    pageList = [HomeTabPage(), Container(color: Colors.green)];
+    pageList = [HomeTabPage(), ProfileTabView()];
     //Page controller
     pageController = PageController();
   }

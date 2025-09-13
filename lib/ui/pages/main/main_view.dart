@@ -33,6 +33,7 @@ class _MainPageState extends State<MainPage> {
   Widget _buildPageView() {
     return PageView(
       controller: state.pageController,
+      physics: const NeverScrollableScrollPhysics(),
       children: state.pageList,
       onPageChanged: (index) {
         logic.switchTap(index);

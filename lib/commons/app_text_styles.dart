@@ -74,6 +74,26 @@ class AppTextStyle {
   static final greyS18Bold = greyS18.copyWith(fontWeight: FontWeight.bold);
   static final greyS18W800 = greyS18.copyWith(fontWeight: FontWeight.w800);
 
+  /// Hiragino Sans / Figma W6 (w600) / 白
+  static final hiraginoW6White = TextStyle(
+    fontFamily: 'Hiragino Sans',
+    fontWeight: FontWeight.w600,
+    color: AppColors.textWhite,
+  );
+
+  // サイズ別バリアント
+  static final hiraginoS14W6White = hiraginoW6White.copyWith(fontSize: 14);
+  static final hiraginoS16W6White = hiraginoW6White.copyWith(fontSize: 16);
+  static final hiraginoS18W6White = hiraginoW6White.copyWith(fontSize: 18);
+
+  /// Figma: #8C0304 / SF Pro Semibold 17
+  static final sfProS17Semibold = TextStyle(
+    fontFamily: 'SF Pro',
+    fontWeight: FontWeight.w600,
+    fontSize: 17,
+    color: AppColors.textWhite,
+  );
+
   ///Tint
   static final tint = TextStyle(color: AppColors.secondary);
 

@@ -1,0 +1,12 @@
+version = 0.1
+
+[default.deploy.parameters]
+stack_name = "fastapi-rt"
+resolve_s3 = true
+s3_prefix = "fastapi-rt"
+region = "ap-northeast-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+parameter_overrides = "TableName=\"Users\" Runtime=\"python3.11\" Arch=\"arm64\""
+image_repositories = []
