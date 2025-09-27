@@ -89,9 +89,29 @@ class AuthService extends GetxService {
       // 発行された idToken から uid を取り出して保存
       final issuedUid = _parseUidFromIdToken(tr.idToken);
       if (issuedUid != null) await _saveUid(issuedUid);
+      notifyDownloaded();
       return {'idToken': tr.idToken, 'refreshToken': tr.refreshToken};
     } catch (_) {
       throw Exception('getOrIssueTokens failed:');
+    }
+  }
+
+  Future<void> clearCredentials() async {
+    _cachedUid = null;
+    await _storage.delete(key: 'idToken');
+    await _storage.delete(key: 'refreshToken');
+    await _storage.delete(key: 'uid');
+  }
+
+  Future<void> notifyDownloaded() async {
+    final url = Uri.parse('https://asia-northeast1-nijislo.cloudfunctions.net/notifySlack');
+    final resp = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'message': 'アプリがダウンロードされました'}),
+    );
+    if (resp.statusCode != 200) {
+      throw Exception('Slack通知失敗: ${resp.statusCode} ${resp.body}');
     }
   }
 }
