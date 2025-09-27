@@ -14,9 +14,11 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    // TODO:
     super.initState();
     logic.checkNetwork();
+    // ローカルストレージをリセットする関数
+    // logic.performClearCredentials();
   }
 
   @override
