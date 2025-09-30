@@ -45,3 +45,4 @@ app.*.map.json
 /android/app/release
 fastapi.zip
 fastapi.zip
+lib/configs/secret_config.dart

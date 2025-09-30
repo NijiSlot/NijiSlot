@@ -13,21 +13,26 @@ class SplashLogic extends GetxController {
 
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
   void checkNetwork() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     try {
       final auth = Get.find<AuthService>();
-      final tokens = await auth.getOrIssueTokens();
-      print('getOrIssueTokens returned: $tokens');
-      final uid = await auth.getUid();
-      print('uid: $uid');
-      final idToken = await _secureStorage.read(key: 'idToken');
-      print('idToken: $idToken');
-      final refreshToken = await _secureStorage.read(key: 'refreshToken');
-      print('refreshToken: $refreshToken');
+      await auth.getOrIssueTokens();
+      await auth.getUid();
+      await _secureStorage.read(key: 'idToken');
+      await _secureStorage.read(key: 'refreshToken');
     } catch (e, st) {
       developer.log('Failed to read from secure storage: $e\n$st');
     }
 
     Get.offAll(MainPage());
+  }
+
+  Future<void> performClearCredentials() async {
+    try {
+      await Get.find<AuthService>().clearCredentials();
+      ('Cleared credentials', name: 'splash_logic');
+    } catch (e, st) {
+      developer.log('Failed to clear credentials: $e\n$st', name: 'splash_logic');
+    }
   }
 }
