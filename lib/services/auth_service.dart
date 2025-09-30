@@ -105,7 +105,9 @@ class AuthService extends GetxService {
   }
 
   Future<void> notifyDownloaded() async {
+
     final url = Uri.parse(secret.notifySlackUrl);
+
     final resp = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
