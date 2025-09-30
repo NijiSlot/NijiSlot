@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:rains/model/response/token_response.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:rains/configs/secret_config.dart' as secret;
 
 class AuthService extends GetxService {
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
@@ -104,7 +105,9 @@ class AuthService extends GetxService {
   }
 
   Future<void> notifyDownloaded() async {
-    final url = Uri.parse('https://asia-northeast1-nijislo.cloudfunctions.net/notifySlack');
+
+    final url = Uri.parse(secret.notifySlackUrl);
+
     final resp = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
